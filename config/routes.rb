@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   match  'auth/:provider/callback' => 'session#create', :via => [:get, :post]
   get 'auth/failure' => 'session#failure'
   get 'logout' => 'session#destroy'
-  
+
   # route /apps/:app_id/engagements/:engagement_id
   resources :apps do
     resources :engagements, :except => :index
@@ -37,4 +37,6 @@ Rails.application.routes.draw do
 
   get 'mail_all_orgs' => 'orgs#mail_all_orgs_form', :as => 'mail_all_orgs_form'
   post 'mail_all_orgs' => 'orgs#mail_all_orgs', :as => 'mail_all_orgs'
+
+  get 'myprojects' => 'myprojects#index', :as => 'myprojects'
 end

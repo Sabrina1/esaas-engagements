@@ -1,0 +1,41 @@
+.page-header
+  %h1 Request Change for  App "#{App.find(@app.id).name}"
+
+= form_for @app, :url => appeditrequest_path(@edit_request.id), :method => :put do
+  .well#status
+    %h4 Status: #{@app.status.humanize(capitalize: false)}  
+  .well#description
+    %h4 Current Description
+    = sanitize @app.description
+    - if @description_updated
+      .text-success
+        %h4 Updated Description
+        = sanitize @edit_request.description
+  .well#features
+    %h4 Current App Initial Features
+    = sanitize @app.features
+    - if @features_updated
+      .text-success
+        %h4 updated features
+        = sanitize @edit_request.features
+  .row
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .well#deployment
+        %h4 Deployment
+        %p{:style => "word-wrap: break-word;"}
+          = link_to @app.deployment_url, @app.deployment_url
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .well#github
+        %h4 Github
+        %p{:style => "word-wrap: break-word;"}
+          = link_to @app.repository_url, @app.repository_url
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .well#pivotal
+        %h4 Pivotal Tracker
+        %p{:style => "word-wrap: break-word;"}
+          = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
+  .well#feedback
+    %h4 Feedback
+    = text_area_tag :feedback, "", size: "24x6"
+  = submit_tag 'Approve Change Request', :class => 'btn btn-primary'
+  = submit_tag 'Send Feedback', :class => 'btn btn-primary', name: 'feedback'

@@ -57,8 +57,13 @@ class MyprojectsController < ApplicationController
     end
 
     def update
+        @app = App.find(params[:id])
         @request = AppEditRequest.where(app_id: params[:id])
         if @request.empty?
+            if "#{@app.status}" == "dead"
+                @app.status = 6
+                @app.save!
+            end
             AppEditRequest.create!(:description => params[:description], :features => params[:features], :app_id => params[:id], :requester_id => session[:user_id])
         end
         redirect_to myproject_path(params[:id])

@@ -36,6 +36,6 @@
           = link_to @app.pivotal_tracker_url, @app.pivotal_tracker_url
   .well#feedback
     %h4 Feedback
-    = text_area_tag :feedback, "", size: "24x6"
+    = text_area_tag :feedback, @edit_request.feedback, size: "24x6"
   = submit_tag 'Approve Change Request', :class => 'btn btn-primary'
-  = submit_tag 'Send Feedback', :class => 'btn btn-primary', name: 'feedback'
+  = submit_tag 'Send Feedback', :class => 'btn btn-primary', name: 'feedback_given'

@@ -83,11 +83,15 @@ class MyprojectsController < ApplicationController
     end
 
     def change_button_text(app_id)
+        app = App.find(app_id)
         request = AppEditRequest.where(app_id: app_id)
-        if request.empty?
-            return "Request Change"
-        else
+        if !request.empty?
             return "Update Request"
+        #TODO: enum for app model is not working correctly
+        elsif "#{app.status}" == "dead"
+            return "Request New Feature"
+        else
+            return "Request Change"
         end
     end
 

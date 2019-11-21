@@ -19,6 +19,13 @@ Given(/^the following users exist:$/) do |table|
   end
 end
 
+Given(/^the following App Edit Requests exist:$/) do |table|
+  # table is a Cucumber::MultilineArgument::DataTable
+  table.hashes.each do |app_edit_request|
+  	AppEditRequest.create(app_edit_request)
+  end
+end
+
 Given(/^I search for "([^"]*)"$/) do |arg1|
   # puts body   really good debugging trick
   fill_in "keyword", with: arg1
